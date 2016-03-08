@@ -27,3 +27,14 @@ For more info, see [this](https://www.gnu.org/software/octave/doc/interpreter/Ge
 ```sh
 mkoctfile --mex utils/viterbiMex.cpp
 ```
+
+## Run it
+
+```sh
+$ matlab
+>> looper_HMM
+     1
+     2
+     ...
+```
+You should see some numbers coming out as the looper does its thing. The results are stored in `results/hmm3.0_Immuno/<depth>_<sample>`.
