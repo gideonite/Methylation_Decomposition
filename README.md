@@ -10,6 +10,18 @@ After you download the dataset, please set the datapath variable at those two fi
 
 
 ## Compiling the mex function
+
+### Matlab
 By default, test_HMM.m uses the very fast mex function that we wrote for viterbi, which performs the same functionality as viterbi.m but is about 1000x faster (as timed by vitFullTest.m). Starting to use the mex is very simple, just do: <br/>
 <code> mex utils/viterbiMex.cpp </code> <br/>
 To use the slow MATLAB function instead, please do/undo comment for the corresponding lines in test_HMM.m.
+
+### Octave
+
+For more info, see [this](https://www.gnu.org/software/octave/doc/interpreter/Getting-Started-with-Mex_002dFiles.html#Getting-Started-with-Mex_002dFiles)
+
+#### tl;dr
+
+```sh
+mkoctfile --mex utils/viterbiMex.cpp
+```
