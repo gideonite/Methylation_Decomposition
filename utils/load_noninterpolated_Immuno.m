@@ -4,7 +4,12 @@ delimiterIn = '\t';
 % delimiterIn = ' ';
 
 headerlinesIn = 0;
-datapath = 'data/';
+datapath = './data/';
+
+if exist(datapath) ~= 7
+  error('cannot find ./data symlinked directory');
+end
+
 raw = importdata([datapath dataset],delimiterIn, headerlinesIn);
 x0 = raw.data(:, 2);
 pos = raw.data(:, 1) + 5000;
