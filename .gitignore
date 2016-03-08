@@ -3,3 +3,6 @@ octave-workspace
 # compiled mex output
 viterbiMex.mex
 viterbiMex.o
+
+# ignore symlinked data directory
+data

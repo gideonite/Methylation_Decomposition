@@ -3,8 +3,8 @@ function [x0, pos, gmints, gmnames] = load_noninterpolated_Immuno(dataset, k)
 delimiterIn = '\t';
 % delimiterIn = ' ';
 
-datapath = '/research-projects/mlgroup2/yusun/MCD/data/ImmunoMix3/';
 headerlinesIn = 0;
+datapath = 'data/';
 raw = importdata([datapath dataset],delimiterIn, headerlinesIn);
 x0 = raw.data(:, 2);
 pos = raw.data(:, 1) + 5000;

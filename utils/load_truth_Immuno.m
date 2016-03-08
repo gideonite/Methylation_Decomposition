@@ -4,7 +4,7 @@ delimiterIn = '\t';
 % delimiterIn = ' ';
 
 headerlinesIn = 0;
-datapath = '/research-projects/mlgroup2/yusun/MCD/data/ImmunoMix3/';
+datapath = 'data/';
 raw = importdata([datapath dataset],delimiterIn, headerlinesIn);
 Z0 = raw.data(:, 2:4);
 pos = raw.data(:, 1) + 5000;

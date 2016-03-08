@@ -4,10 +4,12 @@ Decomposing methylation curves from a mixture of cell population
 ## Getting the Dataset to Work
 This demo uses a dataset called ImmunoMix3, which contains many simulated binary methylation curves for three cell populations as ground truth, with the observed curve at various levels of noise (i.e. depth of coverage). The dataset is available at <br/>
 https://www.dropbox.com/s/ovksanvsgrmmg17/ImmunoMix3.zip?dl=0 <br/>
-After you download the dataset, please set the datapath variable at those two file loaders: <br/>
-- <code> utils/load_truth_Immuno.m </code> <br/>
-- <code> utils/load_noninterpolated_Immuno.m </code>
 
+After you download the dataset, symlink the data directory to `./data`. That is, `cd` into the repo and run
+
+```
+$ ln -s /path/to/data/ImmunoMix3 data
+```
 
 ## Compiling the mex function
 
