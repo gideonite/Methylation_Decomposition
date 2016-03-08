@@ -1,0 +1,5 @@
+octave-workspace
+
+# compiled mex output
+viterbiMex.mex
+viterbiMex.o
