@@ -13,4 +13,4 @@ filename=$(basename "$1")
 extension="${filename##*.}"
 without_extension="${filename%.*}"
 
-sed -e 's/geneNum//g' $1 > $dir/$without_extension".cleaned".$extension
+sed -e 's/sampleNum//g' $1 > $dir/$without_extension".cleaned".$extension

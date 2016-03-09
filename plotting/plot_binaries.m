@@ -4,6 +4,7 @@ addpath('../utils/');
 function plot_binary(noninterpolated_filename, results_filename,
                      truth_filename, no_genes=50) 
   load(results_filename);
+  Z0 = load_truth_Immuno(truth_filename);
   [x0, pos, ~, ~] = load_noninterpolated_Immuno(noninterpolated_filename, no_genes);
 
   pos = pos - 5000;
@@ -22,7 +23,12 @@ end
 ## example
 ##
 
-plot_binary('/home/gideon/Data/methylation-decomposition/ImmunoMix3/Noise_depth_20_sample_8.cleaned.txt', '/home/gideon/Data/methylation-decomposition-results/hmm3.0_Immuno/20_8.mat') 
+datadir = "/home/gideon/Data/methylation-decomposition/ImmunoMix3/";
+
+plot_binary([datadir, 'Noise_depth_20_sample_8.cleaned.txt'],
+            '/home/gideon/Data/methylation-decomposition-results/hmm3.0_Immuno/20_8.mat',
+            [datadir, 'foobar.csv']);
+            ## [datadir, 'Solutions_OneThousandGene_8.txt']);
 
 ## pos = pos - 5000;
 ## % double check I'v sorted
