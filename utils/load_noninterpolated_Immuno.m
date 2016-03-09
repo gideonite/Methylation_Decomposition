@@ -1,24 +1,22 @@
-function [x0, pos, gmints, gmnames] = load_noninterpolated_Immuno(dataset, k)
-% One of those two delimiters should work
-delimiterIn = '\t';
-% delimiterIn = ' ';
+function [x0, pos, gmints, gmnames] = load_noninterpolated_Immuno(dataset, no_genes=50)
 
-headerlinesIn = 0;
-datapath = './data/';
+raw = load(dataset);
 
-if exist(datapath) ~= 7
-  error('cannot find ./data symlinked directory');
-end
+gmints = raw(:,1);
+pos = raw(:, 2) + 5000;
+x0 = raw(:, 3);
 
-raw = importdata([datapath dataset],delimiterIn, headerlinesIn);
-x0 = raw.data(:, 2);
-pos = raw.data(:, 1) + 5000;
-[gmnames, gmints]= unique(raw.textdata,'stable');
+% only take first `no_genes` genes
 if nargin > 1
-	% only take first k genes
-	x0 = x0(1:gmints(k+1)-1);
-	pos = pos(1:gmints(k+1)-1);
-	gmnames = gmnames(1:k);
-	gmints = gmints(1:k);
+  % don't know where the gene numbers are starting, so shift them to 1.
+  mask = (gmints - min(gmints) + 1) < no_genes;
+  x0 = x0(mask);
+  pos = pos(mask);
 end
 end
+
+##
+## example:
+##
+## load_noninterpolated_Immuno("path/to/file.cleaned.txt");
+##

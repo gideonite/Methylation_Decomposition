@@ -3,6 +3,8 @@ function [Z0] = load_truth_Immuno(dataset, k)
 delimiterIn = '\t';
 % delimiterIn = ' ';
 
+% TODO delete some stuff to match the other loader.
+
 headerlinesIn = 0;
 datapath = './data/';
 
