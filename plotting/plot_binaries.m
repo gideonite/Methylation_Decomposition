@@ -30,20 +30,28 @@ function plot_binary(noninterpolated_filename, results_filename,
   for c = 1:3
     figure;
     for i = 1:d
-      subplot(d,1,i);
+      subplot(d+1,1,i+1);
       plot(pos(gmints(c):gmints(c+1)-1), Z0(gmints(c):gmints(c+1)-1, i),'ro');
       hold on
       plot(pos(gmints(c):gmints(c+1)-1), Z(gmints(c):gmints(c+1)-1, i),'b*');
 
       legend('truth','estimated', 'Location','southeast');
-      title(sprintf('binary curve %d with weight %0.2f', i, num2str(w(i))));
+      ## title(sprintf('binary curve %d with weight %0.2f', i, num2str(w(i))));
 
       axis([-5000,5000,-0.1,1.1]);
     end
-  end
   keyboard
+  end
 
 end
+
+datadir = "/home/gideon/Data/methylation-decomposition/ImmunoMix3/"
+resultsdir = "/home/gideon/Data/methylation-decomposition-results/hmm3.0_Immuno/"
+
+plot_binary([datadir 'Noise_depth_20_sample_8.cleaned.txt'],
+            [resultsdir '20_8.mat'],
+            [datadir 'Solutions_OneThousandGene_8.cleaned.txt'],
+            50);
 
 ##
 ## example:
