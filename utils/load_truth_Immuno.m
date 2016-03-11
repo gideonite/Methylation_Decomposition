@@ -1,4 +1,4 @@
-function [Z0] = load_truth_Immuno(dataset, k)
+function [Z0] = load_truth_Immuno(dataset, no_genes)
 
 raw = load(dataset);
 gmints = raw(:,1);

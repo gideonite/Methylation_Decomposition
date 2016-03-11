@@ -22,8 +22,9 @@ end
 
 end
 
-##
-## example:
-##
-## load_noninterpolated_Immuno("Noise_depth_20_sample_8.cleaned.txt");
-##
+
+%%
+%% example:
+%%
+%% load_noninterpolated_Immuno("Noise_depth_20_sample_8.cleaned.txt");
+%%

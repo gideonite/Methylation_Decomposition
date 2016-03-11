@@ -14,12 +14,15 @@ k = 50;
 t = 3;
 iters = [2,2,2];
 noises = [2,1.5,1.0];
+
+datadir = '/scratch/gmd87/ImmunoMix3/';
+
 for sample = 1:20
     disp(sample);
-    truth_dataset = sprintf('Solutions_OneThousandGene_%d.txt',sample);
+    truth_dataset = [datadir sprintf('Solutions_OneThousandGene_%d.cleaned.txt',sample)];
     Z0 = load_truth_Immuno(truth_dataset, k);
     for depth = (1:10) * 10
-        dataset = sprintf('Noise_depth_%d_sample_%d.txt',depth,sample);
+        dataset = [datadir sprintf('Noise_depth_%d_sample_%d.cleaned.txt',depth,sample)];
         [x0, pos, ~, ~] = load_noninterpolated_Immuno(dataset,k);
         [Z,w,curve_errors] = test_HMM(opts,Ts,bins,t,x0,pos,iters,noises,depth);
         save(sprintf('results/hmm3.0_Immuno/%d_%d.mat',depth,sample),...
@@ -29,5 +32,7 @@ for sample = 1:20
         werrs(depth/10,sample) = norm(w-w0,2);
     end
 end
-save('results/hmm3.0_Immuno/errors.mat', 'Zerrs', 'werrs');
+%% save('results/hmm3.0_Immuno/errors.mat', 'Zerrs', 'werrs');
+
+
 end
