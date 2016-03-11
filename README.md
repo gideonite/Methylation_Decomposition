@@ -38,3 +38,7 @@ $ matlab
      ...
 ```
 You should see some numbers coming out as the looper does its thing. The results are stored in `results/hmm3.0_Immuno/<depth>_<sample>`.
+
+# TODO
+
+- document the input data and the output data as the corresponding data cleaning script(s) for converting various formats to the standard input.
