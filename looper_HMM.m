@@ -32,7 +32,6 @@ for sample = 1:20
         werrs(depth/10,sample) = norm(w-w0,2);
     end
 end
-%% save('results/hmm3.0_Immuno/errors.mat', 'Zerrs', 'werrs');
-
+save('results/hmm3.0_Immuno/errors.mat', 'Zerrs', 'werrs');
 
 end
