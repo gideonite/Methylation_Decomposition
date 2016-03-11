@@ -13,8 +13,8 @@ if nargin > 1
   % don't know where the gene numbers are starting, so shift them to 1.
   mask = (geneno - min(geneno) + 1) < no_genes;
 
-  x0 = x0(mask);
-  pos = pos(mask);
+  x0 = x0(mask,:);
+  pos = pos(mask,:);
 
   gmnames = gmnames(1:no_genes);
   gmints = gmints(1:no_genes);
