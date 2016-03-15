@@ -75,6 +75,14 @@ double logbinompdf(double k, double n, double p){
 	return sum1 - sum2 + k*log(p) + (n-k)*log(1-p);
 }
 
+/*
+  TODO do whatever it takes to implement the beta distribution at v,
+  just as in the other functions. Will probably involve getting the
+  gamma distribution. See
+  http://research.microsoft.com/en-us/um/people/minka/software/lightspeed/
+  for the chance to take some code??
+*/
+
 void viterbi_unique(double* x0, double** Ts, double* bins, double* pos, double* w, 
 	double noise, int depth, int d, int t, int n, double* s_star){
 	int D = myPow(2,d);
