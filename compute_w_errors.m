@@ -1,3 +1,5 @@
+% TODO: make this into some sort of proper function.
+
 % TODO: create a file called "global_variables.m" and all this stuff
 % there.
 addpath('utils/');
@@ -26,35 +28,39 @@ w = rand(t, 1); w = w./sum(w);
 
 ground_truth_w = [0.15,0.3,0.55]';
 
-%% samples = 1:20;
-samples = 1:1;
-for sample = samples
-  disp('sample');
-  disp(sample);
-  truth_dataset = [datadir sprintf('Solutions_OneThousandGene_%d.cleaned.txt',sample)];
+samples = 1:20; %samples = 1:1;
+sequencing_depths = 10:10:100; %sequencing_depths = 100;
+noise_levels = 1:.1:2;
+w_errors = zeros(length(samples), length(sequencing_depths), length(noise_levels));
+for i = 1:length(samples)
+  disp(['sample ' int2str(samples(i))]);
+  truth_dataset = [datadir sprintf('Solutions_OneThousandGene_%d.cleaned.txt',samples(i))];
 
   Z0 = load_truth_Immuno(truth_dataset, no_genes);
 
-  for sequencing_depth = 100
-  %% for sequencing_depth = 10:10:100
-    dataset = [datadir sprintf('Noise_depth_%d_sample_%d.cleaned.txt',sequencing_depth,sample)];
+  for j = 1:length(sequencing_depths)
+    dataset = [datadir sprintf('Noise_depth_%d_sample_%d.cleaned.txt', ...
+                               sequencing_depths(j), samples(i))];
     [x0, pos, ~, ~] = load_noninterpolated_Immuno(dataset, no_genes);
 
-    noises = 1:.1:2;
-    iters = repmat(2,1,length(noises)); % [2, 2, ..., 2]
-    for noise_level = 1 : length(noises)
+    iters = repmat(2,1,length(noise_levels)); % [2, 2, ..., 2]
+    for k = 1 : length(noise_levels)
       avg_w = 0;
-      for unused = 1 : iters(noise_level)
+      for unused = 1 : iters(k)
         viterbiOutput = viterbiMex(x0, Ts, double(bins), pos, w, ...
-                                   noises(noise_level), sequencing_depth, t, size(bins,2), length(x0));
+                                   noise_levels(k), sequencing_depths(j), t, size(bins,2), length(x0));
         Z = decode_state(viterbiOutput,t);
         w = quadmin(Z, x0, opts);
         avg_w = avg_w + w;
       end
 
-      avg_w =  avg_w ./ iters(noise_level);
+      avg_w =  avg_w ./ iters(k);
       w_err = norm(avg_w - ground_truth_w,2);
+      w_errors(i, j, k) = w_err;
     end
   end
 end
+
+save('results/hmm3.0_Immuno/w_errors.mat', 'w_errors');
+
 %% save('results/hmm3.0_Immuno/errors.mat', 'Zerrs', 'werrs');
